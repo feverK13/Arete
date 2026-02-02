@@ -1,8 +1,13 @@
+import { useSelector } from 'react-redux'
+
 import styles from './XPBar.module.css'
 
-export default function XPBar({ currentXp, currentLvl }) {
+export default function XPBar() {
+  const { currentXp, currentLvl } = useSelector(state => state.user)
+
   const maxXp = Math.round(100 * Math.pow(1.25, currentLvl))
   const fillPercentage = Math.min((currentXp / maxXp) * 100, 100)
+
   return (
     <div className={styles.xpBarBlock}>
       <div className={styles.stats}>
