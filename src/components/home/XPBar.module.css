@@ -2,14 +2,12 @@
   display: grid;
   grid-template-columns: 100%;
   gap: 8px;
-  margin: 32px 0;
   border: 2px solid var(--color-black);
   padding: 16px 24px;
 }
 .stats {
   display: flex;
   justify-content: space-between;
-  width: 100%;
 }
 .statInfo {
   font-weight: 600;
@@ -18,7 +16,6 @@
 }
 .xpFillFrame {
   outline: 2px solid var(--color-black);
-  width: 100%;
 }
 .xpFill {
   transition: width 0.5s ease-in-out;
