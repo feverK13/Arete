@@ -1,41 +1,28 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-import { fetchUserData } from './apiData'
-
 const initialState = {
-  name: 'Player 1',
-  currentLvl: 1,
-  currentXp: 0,
-  balance: 0,
+  currentUser: null,
 }
 
 const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    addXp: state => {
-      state.currentXp += 10
+    setUser(state, action) {
+      state.currentUser = action.payload
     },
-    levelUp: state => {
-      state.currentLvl += 1
-      state.currentXp = 0
+    logoutUser(state) {
+      state.currentUser = null
     },
-    addBalance: (state, action) => {
-      state.balance += action.payload
+    updateStats(state, action) {
+      if (state.currentUser) {
+        state.currentUser.currentXp = action.payload.currentXp
+        state.currentUser.currentLvl = action.payload.currentLvl
+        state.currentUser.balance = action.payload.balance
+      }
     },
-    setName: (state, action) => {
-      state.name = action.payload
-    },
-  },
-  extraReducers: builder => {
-    builder.addCase(fetchUserData.fulfilled, (state, action) => {
-      state.name = action.payload.name
-      state.currentLvl = action.payload.currentLvl
-      state.currentXp = action.payload.currentXp
-      state.balance = action.payload.balance
-    })
   },
 })
 
-export const { addXp, addBalance, levelUp, setName } = userSlice.actions
+export const { setUser, logoutUser, updateStats } = userSlice.actions
 export default userSlice.reducer

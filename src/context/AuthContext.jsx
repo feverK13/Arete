@@ -1,30 +1,55 @@
 import { createContext, useContext, useEffect, useState } from 'react'
 
+import { createUser, fetchUserByEmail, fetchUserData } from '../store/apiData.js'
+
 const AuthContext = createContext(null)
 
 export default function AuthProvider({ children }) {
   const [user, setUser] = useState(null)
   const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     const storedUser = localStorage.getItem('areteUser')
     if (storedUser) {
-      const userData = JSON.parse(storedUser)
-      setUser(userData)
-      setIsLoggedIn(true)
+      try {
+        const userData = JSON.parse(storedUser)
+        setUser(userData)
+        setIsLoggedIn(true)
+      } catch (e) {
+        console.error('Помилка парсингу user data')
+        localStorage.removeItem('areteUser')
+      }
     }
+    setLoading(false)
   }, [])
 
-  const register = userData => {
-    localStorage.setItem('areteUser', JSON.stringify(userData))
-    setUser(userData)
-    setIsLoggedIn(true)
+  const register = async userData => {
+    try {
+      const newUser = await createUser(userData)
+      localStorage.setItem('areteUser', JSON.stringify(newUser))
+      setUser(newUser)
+      setIsLoggedIn(true)
+    } catch (error) {
+      throw error
+    }
   }
 
-  const login = userData => {
-    localStorage.setItem('areteUser', JSON.stringify(userData))
-    setUser(userData)
-    setIsLoggedIn(true)
+  const login = async ({ email, password }) => {
+    try {
+      const userData = await fetchUserByEmail(email)
+      if (!userData) {
+        throw new Error('Користувача з таким email не знайдено')
+      }
+      if (userData.password !== password) {
+        throw new Error('Невірний пароль')
+      }
+      localStorage.setItem('areteUser', JSON.stringify(userData))
+      setUser(userData)
+      setIsLoggedIn(true)
+    } catch (error) {
+      throw error
+    }
   }
 
   const logout = () => {
@@ -36,6 +61,7 @@ export default function AuthProvider({ children }) {
   const value = {
     user,
     isLoggedIn,
+    loading,
     register,
     login,
     logout,
