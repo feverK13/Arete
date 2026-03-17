@@ -1,0 +1,56 @@
+.taskCard {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 24px;
+  border: 2px solid var(--color-black);
+  padding: 16px;
+}
+.cardTitle {
+  font-weight: 600;
+  font-size: var(--font-lg);
+  font-family: var(--font-heading);
+}
+.cardStatLabel {
+  font-weight: 600;
+  font-size: var(--font-sm);
+  font-family: var(--font-heading);
+}
+.cardStat {
+  font-weight: 700;
+  font-size: var(--font-sm);
+  font-family: var(--font-heading);
+}
+.cardRewardContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.cardReward {
+  display: flex;
+  gap: 24px;
+}
+.cardProgress {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.progressBar {
+  display: flex;
+  gap: 8px;
+}
+.filledPoint {
+  border: 2px solid var(--color-black);
+  background-color: var(--color-black);
+  width: 16px;
+  height: 16px;
+}
+.emptyPoint {
+  border: 2px solid var(--color-black);
+  background-color: var(--color-white);
+  width: 16px;
+  height: 16px;
+}
+.cardStatus {
+  margin-top: auto;
+}

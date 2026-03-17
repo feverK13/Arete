@@ -10,7 +10,7 @@
   font-size: var(--font-md);
 }
 .button:hover {
-  outline: 1px solid var(--color-black);
+  /* outline: 1px solid var(--color-black); */
   background-color: var(--color-white);
   color: var(--color-black);
 }

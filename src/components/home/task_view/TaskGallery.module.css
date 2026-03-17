@@ -1,0 +1,25 @@
+.galleryContainer {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 24px;
+  width: 100%;
+}
+.tasksGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 32px;
+}
+.modalOverlay {
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  justify-content: center;
+  align-items: center;
+  z-index: 5;
+  backdrop-filter: blur(1px);
+  background-color: rgba(19, 19, 19, 0.6);
+  padding: 16px;
+  width: 100vw;
+  height: 100vh;
+}

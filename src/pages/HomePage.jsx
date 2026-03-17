@@ -1,8 +1,9 @@
 import { useDispatch } from 'react-redux'
 
 import QuoteBlock from '../components/home/QuoteBlock'
-import XPBar from '../components/home/XPBar.jsx'
-import Button from '../components/ui/Button.jsx'
+import XPBar from '../components/home/XPBar'
+import TaskGallery from '../components/home/task_view/TaskGallery'
+import Button from '../components/ui/Button'
 // import { addXp } from '../store/userSlice.js'
 import styles from '../styles/Home.module.css'
 
@@ -28,7 +29,9 @@ export default function HomePage() {
 
       {/* <Button children={'Збільшити досвід'} onClick={() => dispatch(addXp())} /> */}
 
-      <main className={styles.homeWorkspace}></main>
+      <main className={styles.homeWorkspace}>
+        <TaskGallery />
+      </main>
     </div>
   )
 }

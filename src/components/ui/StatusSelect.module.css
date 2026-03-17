@@ -1,0 +1,41 @@
+.statusSelect :global(.custom-select__control) {
+  box-shadow: none;
+  border: 2px solid var(--color-black);
+  border-radius: 0;
+  background-color: var(--color-white);
+  padding: 4px 8px;
+}
+.statusSelect :global(.custom-select__control:hover),
+.statusSelect :global(.custom-select__control--is-focused) {
+  box-shadow: none;
+}
+.statusSelect :global(.custom-select__menu) {
+  margin: 0;
+  box-shadow: none;
+  border: 2px solid var(--color-black);
+  border-top: none;
+  border-radius: 0;
+}
+.statusSelect :global(.custom-select__option) {
+  cursor: pointer;
+  padding: 8px 16px;
+  color: var(--color-black);
+}
+.statusSelect :global(.custom-select__option--is-focused) {
+  background-color: var(--color-gray);
+}
+.statusSelect :global(.custom-select__option--is-selected) {
+  background-color: var(--color-gray);
+  color: var(--color-white);
+}
+.statusSelect :global(.custom-select__dropdown-indicator) {
+  transition: transform ease-in-out 0.2s;
+  padding: 4px;
+  color: var(--color-black);
+}
+.statusSelect :global(.custom-select__control--menu-is-open .custom-select__dropdown-indicator) {
+  transform: rotate(180deg);
+}
+.statusSelect :global(.custom-select__container) {
+  width: 100%;
+}

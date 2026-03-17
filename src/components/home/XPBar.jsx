@@ -14,8 +14,8 @@ export default function XPBar() {
     <div className={styles.xpBarBlock}>
       <div className={styles.stats}>
         <p className={styles.statInfo}>
-          Your LvL:{'  '}
-          <span style={{ fontSize: 'var(--font-base)', fontWeight: 800 }}>{currentLvl}</span>
+          Ваш рівень:{'  '}
+          <span style={{ fontSize: 'var(--font-base)', fontWeight: 700 }}>{currentLvl}</span>
         </p>
         <p className={styles.statInfo}>
           {currentXp} / {maxXp}
