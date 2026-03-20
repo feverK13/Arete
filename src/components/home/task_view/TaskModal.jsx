@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 
 import Button from '../../ui/Button'
+import InlineEdit from '../../ui/InlineEdit'
 import StatusSelect from '../../ui/StatusSelect'
 import styles from './TaskModal.module.css'
 
@@ -31,8 +32,8 @@ export default function TaskModal({ task, onClose }) {
             </svg>
             Назад
           </button>
-          <h2 className={styles.cardTitle}>{task.title}</h2>
-          <p className={styles.blockDescription}>{task.description}</p>
+          <InlineEdit value={task.title} className={styles.cardTitle} />
+          <InlineEdit value={task.description} className={styles.blockDescription} />
         </div>
 
         <div className={styles.cardRewardContainer}>
@@ -51,7 +52,7 @@ export default function TaskModal({ task, onClose }) {
             {task.subtasks.map(subtask => (
               <li key={subtask.id} className={styles.subtaskItem}>
                 <input type='checkbox' defaultChecked={subtask.isCompleted} />
-                <span>{subtask.text}</span>
+                <InlineEdit value={subtask.text} />
               </li>
             ))}
           </ul>

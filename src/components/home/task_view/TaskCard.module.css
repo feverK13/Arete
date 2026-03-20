@@ -9,6 +9,7 @@
 .cardTitle {
   font-weight: 600;
   font-size: var(--font-lg);
+  line-height: 1.24;
   font-family: var(--font-heading);
 }
 .cardStatLabel {

@@ -1,0 +1,9 @@
+.editInput {
+  border: 2px solid var(--color-black);
+  border-radius: none;
+  background-color: rgba(19, 19, 19, 0.1);
+  padding: 2px;
+  overflow: hidden;
+  resize: none;
+  letter-spacing: inherit;
+}

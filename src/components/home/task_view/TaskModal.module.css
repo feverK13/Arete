@@ -1,6 +1,9 @@
 .cardTitle {
+  display: block;
+  padding: 2px;
   font-weight: 600;
   font-size: var(--font-lg);
+  line-height: 1.5;
   font-family: var(--font-heading);
 }
 .cardStatLabel {
@@ -23,28 +26,27 @@
   gap: 24px;
 }
 .expandedCard {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: minmax(100%, 800px);
   place-self: center;
   gap: 32px;
-  margin-top: 24px;
   box-shadow: 5px 5px 20px 0px var(--color-gray);
   background-color: var(--color-white);
   padding: 16px;
-  max-width: 880px;
+  min-width: fit-content;
   max-height: 90vh;
   overflow-y: auto;
 }
 .returnBtn {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items: center;
   align-self: flex-start;
   gap: 8px;
   transition: 0.2s;
-  margin-bottom: 24px;
   border: 2px solid var(--color-black);
   background: none;
+  padding: 2px 4px;
   color: var(--color-gray);
   font-weight: 400;
   font-size: var(--font-base);
@@ -60,9 +62,11 @@
   gap: 8px;
 }
 .blockDescription {
+  display: block;
+  padding: 2px;
   color: var(--color-black);
   font-size: var(--font-base);
-  line-height: 1.24;
+  line-height: 1.5;
 }
 .subtasksContainer {
   display: flex;
