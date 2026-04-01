@@ -1,11 +1,15 @@
 import { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
 
+import { editTaskThunk } from '../../../store/tasksSlice'
 import Button from '../../ui/Button'
 import InlineEdit from '../../ui/InlineEdit'
 import StatusSelect from '../../ui/StatusSelect'
 import styles from './TaskModal.module.css'
 
 export default function TaskModal({ task, onClose }) {
+  const dispatch = useDispatch()
+
   useEffect(() => {
     document.body.style.overflow = 'hidden'
     return () => {
@@ -32,8 +36,36 @@ export default function TaskModal({ task, onClose }) {
             </svg>
             Назад
           </button>
-          <InlineEdit value={task.title} className={styles.cardTitle} />
-          <InlineEdit value={task.description} className={styles.blockDescription} />
+          <InlineEdit
+            value={task.title}
+            className={styles.cardTitle}
+            onChange={newValue => {
+              if (newValue !== task.title) {
+                dispatch(
+                  editTaskThunk({
+                    userId: task.userId,
+                    taskId: task.id,
+                    updatedTaskData: { title: newValue },
+                  })
+                )
+              }
+            }}
+          />
+          <InlineEdit
+            value={task.description}
+            className={styles.blockDescription}
+            onChange={newValue => {
+              if (newValue !== task.description) {
+                dispatch(
+                  editTaskThunk({
+                    userId: task.userId,
+                    taskId: task.id,
+                    updatedTaskData: { description: newValue },
+                  })
+                )
+              }
+            }}
+          />
         </div>
 
         <div className={styles.cardRewardContainer}>
@@ -52,7 +84,26 @@ export default function TaskModal({ task, onClose }) {
             {task.subtasks.map(subtask => (
               <li key={subtask.id} className={styles.subtaskItem}>
                 <input type='checkbox' defaultChecked={subtask.isCompleted} />
-                <InlineEdit value={subtask.text} />
+                <InlineEdit
+                  value={subtask.text}
+                  onChange={newValue => {
+                    if (newValue !== subtask.text) {
+                      dispatch(
+                        editTaskThunk({
+                          userId: task.userId,
+                          taskId: task.id,
+                          updatedTaskData: {
+                            subtasks: task.subtasks.map(mySubtask =>
+                              mySubtask.id === subtask.id
+                                ? { ...mySubtask, text: newValue }
+                                : mySubtask
+                            ),
+                          },
+                        })
+                      )
+                    }
+                  }}
+                />
               </li>
             ))}
           </ul>
