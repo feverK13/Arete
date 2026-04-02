@@ -5,6 +5,17 @@ export default function TaskCard({ task, onOpen }) {
   const totalSubtasks = task.subtasks.length
   const finishedTasks = task.subtasks.filter(subtask => subtask.isCompleted).length
 
+  const statusOptions = [
+    { value: 'TODO', label: 'У черзі' },
+    { value: 'IN_PROGRESS', label: 'В процесі' },
+    { value: 'DONE', label: 'Завершено' },
+  ]
+
+  function getStatusLabel(statusValue) {
+    const foundOption = statusOptions.find(option => option.value === statusValue)
+    return foundOption ? foundOption.label : 'Не обрано'
+  }
+
   return (
     <>
       <div
@@ -40,8 +51,9 @@ export default function TaskCard({ task, onOpen }) {
           </div>
         </div>
 
-        <div className={styles.cardStatus}>
-          <StatusSelect />
+        <div className={styles.cardStatBlock}>
+          <p className={styles.cardStatLabel}>Статус: </p>
+          <p className={styles.cardStat}>{getStatusLabel(task.status)}</p>
         </div>
       </div>
     </>

@@ -8,12 +8,12 @@
   padding: 0 16px;
   color: var(--color-black);
 }
-.aboutUsContainer > .aboutUsHeader,
+/* .aboutUsContainer > .aboutUsHeader,
 .aboutUsContainer > .aboutUsStory,
 .aboutUsContainer > .aboutUsCreator,
 .aboutUsContainer > .feedbackWrapper {
   scroll-snap-align: start;
-}
+} */
 .aboutUsHeader {
   display: flex;
   flex-direction: column;

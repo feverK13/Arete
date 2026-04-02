@@ -10,7 +10,7 @@
   padding: 0 24px;
   width: 100%;
   height: var(--navbar-height);
-  scroll-snap-align: start;
+  /* scroll-snap-align: start; */
 }
 .navLogo {
   color: var(--color-black);

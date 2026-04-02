@@ -17,6 +17,23 @@ export default function TaskModal({ task, onClose }) {
     }
   }, [])
 
+  const handleAddSubtask = () => {
+    const newSubtask = {
+      id: Date.now().toString(),
+      text: 'Нова підзадача',
+      isCompleted: false,
+    }
+    dispatch(
+      editTaskThunk({
+        userId: task.userId,
+        taskId: task.id,
+        updatedTaskData: {
+          subtasks: [...task.subtasks, newSubtask],
+        },
+      })
+    )
+  }
+
   return (
     <div className={styles.expandedCardContainer}>
       <div className={styles.expandedCard}>
@@ -75,7 +92,20 @@ export default function TaskModal({ task, onClose }) {
             <p className={styles.cardStat}>{task.rewardCoins} монет</p>
           </div>
 
-          <StatusSelect />
+          <StatusSelect
+            currentStatus={task.status}
+            onChange={newStatus => {
+              if (newStatus !== task.status) {
+                dispatch(
+                  editTaskThunk({
+                    userId: task.userId,
+                    taskId: task.id,
+                    updatedTaskData: { status: newStatus },
+                  })
+                )
+              }
+            }}
+          />
         </div>
 
         <div className={styles.subtasksContainer}>
@@ -83,7 +113,28 @@ export default function TaskModal({ task, onClose }) {
           <ul className={styles.subtaskList}>
             {task.subtasks.map(subtask => (
               <li key={subtask.id} className={styles.subtaskItem}>
-                <input type='checkbox' defaultChecked={subtask.isCompleted} />
+                <input
+                  type='checkbox'
+                  checked={subtask.isCompleted}
+                  onChange={e => {
+                    const newCheckedState = e.target.checked
+                    if (newCheckedState !== subtask.isCompleted) {
+                      dispatch(
+                        editTaskThunk({
+                          userId: task.userId,
+                          taskId: task.id,
+                          updatedTaskData: {
+                            subtasks: task.subtasks.map(mySubtask =>
+                              mySubtask.id === subtask.id
+                                ? { ...mySubtask, isCompleted: newCheckedState }
+                                : mySubtask
+                            ),
+                          },
+                        })
+                      )
+                    }
+                  }}
+                />
                 <InlineEdit
                   value={subtask.text}
                   onChange={newValue => {
@@ -107,7 +158,7 @@ export default function TaskModal({ task, onClose }) {
               </li>
             ))}
           </ul>
-          <Button children='Додати завдання' />
+          <Button children='Додати завдання' onClick={handleAddSubtask} />
         </div>
       </div>
     </div>

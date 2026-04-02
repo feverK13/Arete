@@ -69,6 +69,22 @@ export const fetchTasks = async userId => {
   }
 }
 
+export const createTask = async (userId, newTaskData) => {
+  const response = await fetch(`${apiUrl}/${userId}/tasks`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(newTaskData),
+  })
+
+  if (response.ok) {
+    return await response.json()
+  } else {
+    throw new Error('Не вдалося створити нове завдання')
+  }
+}
+
 export const updateTask = async (userId, taskId, updatedTaskData) => {
   const taskUrl = `https://698a159ac04d974bc6a14c92.mockapi.io/api/ver1/users/${userId}/tasks/${taskId}`
   const response = await fetch(taskUrl, {
